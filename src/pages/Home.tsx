@@ -140,11 +140,7 @@ export default function Home() {
       </div>
       {isLoadingQuizz && "Loading quizz..."}
       {!quiz?.length ? (
-        <span>
-          {error?.message
-            ? `An error occured: ${error?.message}`
-            : "The quiz is empty. Please try again later "}
-        </span>
+        error?.message && <span>{`An error occured: ${error.message}`}</span>
       ) : (
         <div className="container">
           <div

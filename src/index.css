@@ -38,7 +38,8 @@ body {
   background-color: white;
 }
 .btn:hover:not(.readonly):not(:disabled) {
-  background-color: rgba(144, 238, 144, 0.3);
+  color: white;
+  background-color: green;
 }
 .btn:disabled {
   background-color: lightgray;
@@ -67,9 +68,7 @@ body {
   background-color: gray;
 }
 
-.btn-selected {
-  background-color: greenyellow;
-}
+.btn-selected,
 .btn-selected-good-answer,
 .btn-selected-success {
   background-color: green;
