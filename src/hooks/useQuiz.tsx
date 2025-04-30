@@ -35,6 +35,7 @@ interface IProps {
 interface UseCategoriesReturnProps {
   quiz: Quiz[];
   isLoading: boolean;
+  error?: Error | null;
   refetch: () => void;
 }
 
@@ -42,7 +43,7 @@ export function useQuiz({
   category,
   difficulty,
 }: IProps): UseCategoriesReturnProps {
-  const { data, isLoading, isFetching, refetch } = useQuery({
+  const { data, isLoading, isFetching, error, refetch } = useQuery({
     queryKey: ["quiz", category, difficulty],
     queryFn: () => getQuiz(category, difficulty),
     enabled: false,
@@ -60,6 +61,7 @@ export function useQuiz({
   return {
     quiz,
     isLoading: isLoading || isFetching,
+    error,
     refetch,
   };
 }

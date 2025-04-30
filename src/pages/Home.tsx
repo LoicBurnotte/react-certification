@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router";
+import { cleanText } from "../utils/helpers";
 import { Answers } from "../components/Answers";
 import { Fragment, useMemo, useState } from "react";
 import { useResults } from "../context/ResultsContext";
@@ -20,6 +21,7 @@ export default function Home() {
   const {
     refetch,
     quiz,
+    error,
     isLoading: isLoadingQuizz,
   } = useQuiz({
     category: category?.value,
@@ -137,7 +139,13 @@ export default function Home() {
         )}
       </div>
       {isLoadingQuizz && "Loading quizz..."}
-      {!!quiz?.length && (
+      {!quiz?.length ? (
+        <span>
+          {error?.message
+            ? `An error occured: ${error?.message}`
+            : "The quiz is empty. Please try again later "}
+        </span>
+      ) : (
         <div className="container">
           <div
             style={{
@@ -149,10 +157,7 @@ export default function Home() {
           >
             {quiz.map((q, index) => (
               <Fragment key={q.question}>
-                <div
-                  dangerouslySetInnerHTML={{ __html: q.question }}
-                  key={q.question}
-                />
+                <span>{cleanText(q.question)}</span>
                 <Answers
                   answers={q.answers}
                   selected={responses[index]}
